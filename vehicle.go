@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -132,5 +133,20 @@ func generateRating() {
 		}
 
 		vehicleResult[v.Name] = vehResult
+	}
+}
+
+func showRating(model string) {
+	ratingFound := false
+
+	for m, r := range vehicleResult {
+		if m == model {
+			fmt.Printf("Total Ratings:%v\tPositive:%v\tNegative:%v\tNeutral:%v", r.feedbackTotal, r.feedbackPositive, r.feedbackNegative, r.feedbackNeutral)
+			ratingFound = true
+		}
+	}
+
+	if !ratingFound {
+		fmt.Printf("No rating for this vehicle")
 	}
 }
